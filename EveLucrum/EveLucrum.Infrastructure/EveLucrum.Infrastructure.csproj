@@ -41,8 +41,13 @@
   <ItemGroup>
     <Compile Include="API\AccountReader.cs" />
     <Compile Include="API\APIHelper.cs" />
+    <Compile Include="API\SkillTypes.cs" />
     <Compile Include="API\SkillReader.cs" />
+    <Compile Include="API\SystemTypes.cs" />
+    <Compile Include="EnumerableExt.cs" />
     <Compile Include="ICharacterValuesCalculator.cs" />
+    <Compile Include="Market\EveCentralReader.cs" />
+    <Compile Include="Market\IMarketReader.cs" />
     <Compile Include="MaxedCharacterValuesCalculator.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -52,6 +57,7 @@
       <Name>EVE.Net</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

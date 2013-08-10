@@ -13,6 +13,8 @@ namespace EveLucrum.ApplicationServices
     {
         private readonly ILucrumContext context;
 
+        public IRepository Repository { get { return context; } }
+
         public APIService(ILucrumContext context)
         {
             this.context = context;
@@ -28,6 +30,7 @@ namespace EveLucrum.ApplicationServices
             var existingCharacters = account.Characters.ToList();
 
             var apiAccountReader = new AccountReader(account.KeyID, account.VerificationCode);
+            var apiCharacterReader = new SkillReader(account.KeyID, account.VerificationCode);
 
             var characterDTOs = apiAccountReader.GetCharacters().ToList();
 
@@ -52,12 +55,16 @@ namespace EveLucrum.ApplicationServices
                 if (character == null)
                 {
                     //new character
+                    var tradingSkills = apiCharacterReader.GetTradingSkillLevels(characterDTO.CharacterID);
+
                     character = new Character()
                         {
                             Account = account,
                             ActorID = characterDTO.CharacterID,
                             CorporationName = characterDTO.CorporationName,
-                            Name = characterDTO.Name
+                            Name = characterDTO.Name,
+                            AccountingSkill = tradingSkills.Item1,
+                            BrokerRelationsSkill = tradingSkills.Item2
                         };
                     context.Add(character);
                 }

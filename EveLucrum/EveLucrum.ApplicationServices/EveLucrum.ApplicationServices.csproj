@@ -41,6 +41,8 @@
   <ItemGroup>
     <Compile Include="APIService.cs" />
     <Compile Include="IAPIService.cs" />
+    <Compile Include="IMarketService.cs" />
+    <Compile Include="MarketService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

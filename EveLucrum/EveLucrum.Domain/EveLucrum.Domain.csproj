@@ -41,6 +41,8 @@
   <ItemGroup>
     <Compile Include="Entities\Account.cs" />
     <Compile Include="Entities\Character.cs" />
+    <Compile Include="Entities\ItemPrice.cs" />
+    <Compile Include="Entities\ItemType.cs" />
     <Compile Include="IDataContext.cs" />
     <Compile Include="ILucrumContext.cs" />
     <Compile Include="IRepository.cs" />

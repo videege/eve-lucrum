@@ -1,6 +1,7 @@
 ﻿using EveLucrum.ApplicationServices;
 using EveLucrum.Data;
 using EveLucrum.Domain;
+using EveLucrum.Infrastructure.Market;
 using Ninject.Modules;
 
 namespace EveLucrum.WPF
@@ -10,7 +11,9 @@ namespace EveLucrum.WPF
         public override void Load()
         {
             Bind<ILucrumContext>().To<LucrumContextEF>().InThreadScope();
-            Bind<IAPIService>().To<APIService>().InThreadScope();
+            Bind<IAPIService>().To<APIService>();
+            Bind<IMarketReader>().To<EveCentralReader>();
+            Bind<IMarketService>().To<MarketService>();
         }
     }
 }

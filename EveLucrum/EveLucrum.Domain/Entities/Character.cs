@@ -17,5 +17,11 @@ namespace EveLucrum.Domain.Entities
         public string Name { get; set; }
 
         public string CorporationName { get; set; }
+
+        public int BrokerRelationsSkill { get; set; }
+
+        public int AccountingSkill { get; set; }
+
+
     }
 }

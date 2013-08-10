@@ -96,12 +96,19 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Pages\Prices.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Pages\Settings.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Compile Include="Pages\Home.xaml.cs">
       <DependentUpon>Home.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\Prices.xaml.cs">
+      <DependentUpon>Prices.xaml</DependentUpon>
     </Compile>
     <Compile Include="Pages\Settings.xaml.cs">
       <DependentUpon>Settings.xaml</DependentUpon>
@@ -110,6 +117,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+    <None Include="itemtypes.csv">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
@@ -124,6 +134,10 @@
     <ProjectReference Include="..\EveLucrum.Domain\EveLucrum.Domain.csproj">
       <Project>{71DA86B4-0AA3-4949-AE72-AF4755CB6CD5}</Project>
       <Name>EveLucrum.Domain</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\EveLucrum.Infrastructure\EveLucrum.Infrastructure.csproj">
+      <Project>{1BD8FB2C-11D0-4828-932D-CEA86F784F28}</Project>
+      <Name>EveLucrum.Infrastructure</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

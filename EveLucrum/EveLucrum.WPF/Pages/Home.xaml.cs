@@ -16,6 +16,8 @@ using EveLucrum.ApplicationServices;
 using EveLucrum.Data;
 using EveLucrum.Domain;
 using EveLucrum.Domain.Entities;
+using EveLucrum.Infrastructure.API;
+using EveLucrum.Infrastructure.Market;
 using FirstFloor.ModernUI.Windows.Controls;
 
 namespace EveLucrum.WPF.Pages
@@ -29,13 +31,19 @@ namespace EveLucrum.WPF.Pages
         {
             InitializeComponent();
 
-            var service = DependencyResolver.Get<IAPIService>();
-            var context = DependencyResolver.Get<ILucrumContext>();
-            
-            var a = context.Accounts.First();
-            service.UpdateCharacterList(a.AccountID);
-            var x = a.Characters.ToList();
-            ModernDialog.ShowMessage(a.VerificationCode, "vcode", MessageBoxButton.OK);
+            //var service = DependencyResolver.Get<IAPIService>();
+            //var context = DependencyResolver.Get<ILucrumContext>();
+            //var marketService = DependencyResolver.Get<IMarketService>();
+
+            //var a = context.Accounts.First();
+            //service.UpdateCharacterList(a.AccountID);
+            //var x = a.Characters.ToList();
+
+            //marketService.GetLatestPricesForAllItems();
+
+            //var fusionS = marketService.Repository.ItemTypes.First(i => i.TypeID == 183);
+
+            //ModernDialog.ShowMessage(a.VerificationCode, "vcode", MessageBoxButton.OK);
         }
 
     }

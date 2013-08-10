@@ -11,5 +11,7 @@ namespace EveLucrum.Domain
     {
         IQueryable<Account> Accounts { get; }
         IQueryable<Character> Characters { get; }
+        IQueryable<ItemType> ItemTypes { get; }
+        IQueryable<ItemPrice> ItemPrices { get; }
     }
 }
