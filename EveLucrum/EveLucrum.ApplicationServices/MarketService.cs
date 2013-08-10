@@ -23,11 +23,11 @@ namespace EveLucrum.ApplicationServices
 
         public IRepository Repository { get { return context; } }
 
-        public void GetLatestPricesForAllItems()
+        public void GetLatestPricesForAllItems(int systemID)
         {
             var itemIDs = context.ItemTypes.Select(i => i.TypeID).ToList();
             var items = context.ItemTypes.ToDictionary(k => k.TypeID, v => v);
-            var priceDTOs = marketReader.GetPricesForItems(itemIDs, (int) SystemTypes.Jita);
+            var priceDTOs = marketReader.GetPricesForItems(itemIDs, systemID);
 
             foreach (var priceDTO in priceDTOs)
             {
@@ -40,7 +40,7 @@ namespace EveLucrum.ApplicationServices
                         SellVolume = priceDTO.SellVolume,
                         TotalVolume = priceDTO.TotalVolume,
                         PriceDate = priceDTO.PriceDate,
-                        SystemID = (int) SystemTypes.Jita
+                        SystemID = systemID
                     };
                 context.Add(price);
             }
