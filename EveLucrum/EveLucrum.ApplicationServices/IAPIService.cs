@@ -1,4 +1,5 @@
 ﻿using EveLucrum.Domain;
+using EveLucrum.Domain.Entities;
 
 namespace EveLucrum.ApplicationServices
 {
@@ -7,5 +8,7 @@ namespace EveLucrum.ApplicationServices
         void UpdateCharacterList(int accountID);
 
         IRepository Repository { get; }
+        void DeleteCharacter(int characterID);
+        Account AddOrUpdateAccount(string keyID, string vCode);
     }
 }

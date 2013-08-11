@@ -15,9 +15,46 @@ namespace EveLucrum.ApplicationServices
 
         public IRepository Repository { get { return context; } }
 
+
+
         public APIService(ILucrumContext context)
         {
             this.context = context;
+        }
+
+        public void DeleteCharacter(int characterID)
+        {
+            var character = context.Characters.FirstOrDefault(c => c.CharacterID == characterID);
+
+            if (character == null)
+                throw new ArgumentException("Could not locate character.");
+
+            context.Delete(character);
+
+            context.SaveChanges();
+        }
+
+        public Account AddOrUpdateAccount(string keyID, string vCode)
+        {
+            var account = context.Accounts.FirstOrDefault(a => a.KeyID == keyID && a.VerificationCode == vCode);
+
+            if (account == null)
+            {
+                try
+                {
+                    new AccountReader(keyID, vCode).GetCharacters();
+                }
+                catch (Exception)
+                {
+                    throw new ArgumentException("Invalid API key");
+                }
+
+                account = new Account() { KeyID = keyID, VerificationCode = vCode };
+                context.Add(account);
+                context.SaveChanges();
+            }
+
+            return account;
         }
 
         public void UpdateCharacterList(int accountID)

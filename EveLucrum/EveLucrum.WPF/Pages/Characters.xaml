@@ -14,6 +14,7 @@
                 <StackPanel.Resources>
                     <PathGeometry x:Key="InfoIconData">F1 M 31.6666,30.0834L 42.7499,30.0834L 42.7499,33.2501L 42.7499,52.2501L 45.9165,52.2501L 45.9165,57.0001L 31.6666,57.0001L 31.6666,52.2501L 34.8332,52.2501L 34.8332,34.8335L 31.6666,34.8335L 31.6666,30.0834 Z M 38.7917,19C 40.9778,19 42.75,20.7722 42.75,22.9583C 42.75,25.1445 40.9778,26.9167 38.7917,26.9167C 36.6055,26.9167 34.8333,25.1445 34.8333,22.9583C 34.8333,20.7722 36.6055,19 38.7917,19 Z</PathGeometry>
                     <PathGeometry x:Key="DeleteIconData">F1 M 25.3333,23.75L 50.6667,23.75C 51.5411,23.75 51.8541,27.3125 51.8541,27.3125L 24.1458,27.3125C 24.1458,27.3125 24.4589,23.75 25.3333,23.75 Z M 35.625,19.7917L 40.375,19.7917C 40.8122,19.7917 41.9583,20.9378 41.9583,21.375C 41.9583,21.8122 40.8122,22.9584 40.375,22.9584L 35.625,22.9584C 35.1878,22.9584 34.0416,21.8122 34.0416,21.375C 34.0416,20.9378 35.1878,19.7917 35.625,19.7917 Z M 27.7083,28.5L 48.2916,28.5C 49.1661,28.5 49.875,29.2089 49.875,30.0834L 48.2916,53.8334C 48.2916,54.7078 47.5828,55.4167 46.7083,55.4167L 29.2917,55.4167C 28.4172,55.4167 27.7083,54.7078 27.7083,53.8334L 26.125,30.0834C 26.125,29.2089 26.8339,28.5 27.7083,28.5 Z M 30.0833,31.6667L 30.4792,52.25L 33.25,52.25L 32.8542,31.6667L 30.0833,31.6667 Z M 36.4167,31.6667L 36.4167,52.25L 39.5833,52.25L 39.5833,31.6667L 36.4167,31.6667 Z M 43.1458,31.6667L 42.75,52.25L 45.5208,52.25L 45.9167,31.6667L 43.1458,31.6667 Z</PathGeometry>
+                    <PathGeometry x:Key="SelectIconData">F1 M 46.2574,50.0858L 49.5858,53.4142L 55.7426,47.2573L 58.0711,49.5858L 49.5858,58.0711L 43.9289,52.4142L 46.2574,50.0858 Z M 54.75,46L 51.75,49L 43,49L 43,59L 53,59L 53,57.4286L 56,54L 56,62L 40,62L 40,46L 54.75,46 Z M 36,15.1667C 40.3723,15.1667 43.9167,18.7111 43.9167,23.0833C 43.9167,27.4556 40.3723,31 36,31C 31.6278,31 28.0833,27.4556 28.0833,23.0833C 28.0833,18.7111 31.6278,15.1667 36,15.1667 Z M 28.0833,42.0834C 27.0278,42.6111 24.9167,46.8333 24.9167,46.8333C 24.9167,46.8333 23.8611,48.4166 23.3333,54.7499L 18.5833,53.1666L 20.1667,45.25C 20.1667,45.25 23.3333,34.1667 29.6666,34.1668L 42.3332,34.1668C 48.1003,34.1667 51.2417,43.3565 51.7574,45L 46.0953,45C 45.4022,43.7894 44.4989,42.3744 43.9167,42.0833L 44.0464,45L 39,45L 39,57.804L 36.7917,57.9167C 33.4528,57.9167 30.2927,57.1511 27.4774,55.786L 28.0833,42.0834 Z</PathGeometry>
                 </StackPanel.Resources>
                 <TextBlock Text="Character Management" Style="{StaticResource Heading2}" />
                 <mui:BBCodeBlock BBCode="Your imported EVE characters are listed below. [url=/Pages/APIManage.xaml]Click here to add a new character via API key.[/url]" />
@@ -23,10 +24,10 @@
                             <DataGridTemplateColumn.CellTemplate>
                                 <DataTemplate>
                                     <StackPanel Orientation="Horizontal">
-                                        <mui:ModernButton IconData="{StaticResource InfoIconData}" Click="InfoIconClick" />
-                                        <mui:ModernButton IconData="{StaticResource DeleteIconData}" Click="DeleteIconClick" Margin="4,0"/>
+                                        <mui:ModernButton IconData="{StaticResource InfoIconData}" Click="InfoIconClick" ToolTip="Show API Info" />
+                                        <mui:ModernButton IconData="{StaticResource DeleteIconData}" Click="DeleteIconClick" Margin="4,0,4,0" ToolTip="Delete this character"/>
+                                        <mui:ModernButton IconData="{StaticResource SelectIconData}" Click="SelectIconClick" Margin="0,0,4,0" ToolTip="Make this the currently selected character"/>
                                     </StackPanel>
-                                    
                                 </DataTemplate>
 
                             </DataGridTemplateColumn.CellTemplate>

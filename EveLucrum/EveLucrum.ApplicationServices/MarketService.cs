@@ -23,7 +23,7 @@ namespace EveLucrum.ApplicationServices
 
         public IRepository Repository { get { return context; } }
 
-        public void GetLatestPricesForAllItems(int systemID)
+        public int UpdatePricesForAllItems(int systemID)
         {
             var itemIDs = context.ItemTypes.Select(i => i.TypeID).ToList();
             var items = context.ItemTypes.ToDictionary(k => k.TypeID, v => v);
@@ -46,6 +46,17 @@ namespace EveLucrum.ApplicationServices
             }
 
             context.SaveChanges();
+
+            return itemIDs.Count;
+        }
+
+        public IEnumerable<ItemPrice> GetItemPrices(int systemID)
+        {
+            var items = context.ItemPrices.Where(i => i.SystemID == systemID);
+
+            var results = items.GroupBy(i => i.ItemType).Select(g => g.OrderByDescending(p => p.PriceDate).FirstOrDefault()).ToList();
+
+            return results;
         }
     }
 }

@@ -13,7 +13,7 @@
                 <TextBlock Text="Select a system and then press Import Prices to refresh prices." />
                 <GroupBox Header="System Selection" Margin="0,8">
                     <StackPanel Orientation="Horizontal" Margin="4,4" >
-                        <RadioButton Content="Jita" Name="JitaButton"/>
+                        <RadioButton Content="Jita" Name="JitaButton" IsChecked="True"/>
                         <RadioButton Content="Amarr" Margin="8,0" Name="AmarrButton"/>
                     </StackPanel>
                 </GroupBox>
@@ -26,7 +26,7 @@
                         <RowDefinition></RowDefinition>
                     </Grid.RowDefinitions>
                     <Button Content="Import Prices" Width="125" Margin="0,0,8,0" Grid.Column="0" Name="ImportPricesButton" Click="ImportPricesButton_OnClick"/>
-                    <ProgressBar Height="10"  Grid.Column="1" Name="ImportProgressBar"/>
+                    <ProgressBar Height="10"  Grid.Column="1" Name="ImportProgressBar" Visibility="Hidden"/>
 
                 </Grid>
 

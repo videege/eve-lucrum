@@ -44,10 +44,11 @@
     <Compile Include="API\SkillTypes.cs" />
     <Compile Include="API\SkillReader.cs" />
     <Compile Include="API\SystemTypes.cs" />
-    <Compile Include="EnumerableExt.cs" />
+    <Compile Include="Extensions.cs" />
     <Compile Include="ICharacterValuesCalculator.cs" />
     <Compile Include="Market\EveCentralReader.cs" />
     <Compile Include="Market\IMarketReader.cs" />
+    <Compile Include="Market\ProfitCalculator.cs" />
     <Compile Include="MaxedCharacterValuesCalculator.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

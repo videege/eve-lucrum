@@ -36,18 +36,31 @@ namespace EveLucrum.WPF.Pages
             ImportProgressBar.Visibility = Visibility.Visible;
             ImportProgressBar.IsIndeterminate = true;
             ImportPricesButton.IsEnabled = false;
-            var updateTask = Task.Factory.StartNew(() => marketService.GetLatestPricesForAllItems((int) SystemTypes.Jita));
+            int itemsUpdated = 0;
+            int systemID = getCheckedSystemID();
+            var updateTask = Task.Factory.StartNew(() => itemsUpdated = marketService.UpdatePricesForAllItems(systemID));
             updateTask.ContinueWith(delegate
                 {
                     Dispatcher.Invoke(() =>
                         {
                             ImportProgressBar.Visibility = Visibility.Hidden;
                             ImportProgressBar.IsIndeterminate = false;
-                            ModernDialog.ShowMessage("Prices successfully refreshed.", "Import Successful", MessageBoxButton.OK);
+                            ModernDialog.ShowMessage("Prices successfully refreshed.  Updated " + itemsUpdated.ToString() + " items.", "Import Successful", MessageBoxButton.OK);
                             ImportPricesButton.IsEnabled = true;
                         });
                 }, TaskContinuationOptions.OnlyOnRanToCompletion);
 
+        }
+
+        private int getCheckedSystemID()
+        {
+            if (JitaButton.IsChecked.GetValueOrDefault(false))
+                return (int) SystemTypes.Jita;
+
+            if (AmarrButton.IsChecked.GetValueOrDefault(false))
+                return (int) SystemTypes.Jita;  //todo change
+
+            return (int) SystemTypes.Jita;
         }
     }
 }

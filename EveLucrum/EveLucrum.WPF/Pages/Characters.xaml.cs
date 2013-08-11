@@ -15,14 +15,18 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using EveLucrum.ApplicationServices;
 using EveLucrum.Domain;
+using FirstFloor.ModernUI.Windows;
 using FirstFloor.ModernUI.Windows.Controls;
+using FragmentNavigationEventArgs = FirstFloor.ModernUI.Windows.Navigation.FragmentNavigationEventArgs;
+using NavigatingCancelEventArgs = FirstFloor.ModernUI.Windows.Navigation.NavigatingCancelEventArgs;
+using NavigationEventArgs = FirstFloor.ModernUI.Windows.Navigation.NavigationEventArgs;
 
 namespace EveLucrum.WPF.Pages
 {
     /// <summary>
     /// Interaction logic for Characters.xaml
     /// </summary>
-    public partial class Characters : UserControl
+    public partial class Characters : UserControl, IContent
     {
         private readonly IAPIService apiService;
         public Characters()
@@ -30,6 +34,11 @@ namespace EveLucrum.WPF.Pages
             InitializeComponent();
             apiService = DependencyResolver.Get<IAPIService>();
 
+            UpdateGrid();
+        }
+
+        private void UpdateGrid()
+        {
             ObservableCollection<CharacterViewModel> charData = GetData();
             CharactersDataGrid.DataContext = charData;
         }
@@ -41,6 +50,7 @@ namespace EveLucrum.WPF.Pages
 
             var viewModels = new ObservableCollection<CharacterViewModel>(characters.Select(a => new CharacterViewModel()
                 {
+                    CharacterID = a.CharacterID,
                     Name = a.Name,
                     Corporation = a.CorporationName,
                     Accounting = a.AccountingSkill,
@@ -61,12 +71,53 @@ namespace EveLucrum.WPF.Pages
 
         private void DeleteIconClick(object sender, RoutedEventArgs e)
         {
-            throw new NotImplementedException();
+            var viewModel = ((FrameworkElement)sender).DataContext as CharacterViewModel;
+
+            if (ModernDialog.ShowMessage("Are you sure you wish to delete this character?", "Delete " + viewModel.Name,
+                                         MessageBoxButton.YesNo)
+                == MessageBoxResult.Yes)
+            {
+                if (UserSelections.CharacterID == viewModel.CharacterID)
+                    UserSelections.CharacterID = 0;
+                apiService.DeleteCharacter(viewModel.CharacterID);
+                UpdateGrid();
+            }
+        }
+
+
+        public void OnFragmentNavigation(FragmentNavigationEventArgs e)
+        {
+            return;
+        }
+
+        public void OnNavigatedFrom(NavigationEventArgs e)
+        {
+            return;
+        }
+
+        public void OnNavigatedTo(NavigationEventArgs e)
+        {
+            UpdateGrid();
+        }
+
+        public void OnNavigatingFrom(NavigatingCancelEventArgs e)
+        {
+            return;
+        }
+
+        private void SelectIconClick(object sender, RoutedEventArgs e)
+        {
+            var viewModel = ((FrameworkElement)sender).DataContext as CharacterViewModel;
+
+            UserSelections.CharacterID = viewModel.CharacterID;
+            ModernDialog.ShowMessage(viewModel.Name + " is now the current character.", "Character Selected",
+                                     MessageBoxButton.OK);
         }
     }
 
     public class CharacterViewModel
     {
+        public int CharacterID { get; set; }
         public string Name { get; set; }
         public string Corporation { get; set; }
         public int Accounting { get; set; }
